@@ -5,29 +5,253 @@ date: "September 21, 2015"
 output:
   ioslides_presentation:
     css: custom.css
+    smaller: true
+    widescreen: true
 ---
 
-## R Markdown
+## The Problem in Predicting School Dropout
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+1. Student dropout is a phenomenon that has roots much earlier in the education 
+pipeline than high school. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+2. Current early identification strategies are of unknown accuracy, difficult 
+to implement, and rely on late breaking data. 
 
-## Slide with Bullets
+3. The predictors of dropout vary across jurisdictions, making one size fits 
+all models inefficient, biased, or both. 
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+4. Teachers, counselors, principals, and other school staff are spending valuable 
+time assessing student dropout likelihood using manual identification. 
 
-## Slide with R Code and Output
+**Early warning systems promise to reduce this burden and increase accuracy.**
 
-```{r}
-summary(cars)
-```
+## Outline
 
-## Slide with Plot
+- Current state of early warning models
+- A gentle introduction to machine learning
+- Deploying machine learning models to educators
+- Future challenges
 
-```{r, echo=FALSE}
-plot(cars)
-```
+
+## The What of Early Warning Systems
+
+- An Early Warning System (EWS) is simply a predictive system seeking to 
+explain the likelihood of a future outcome using data available today
+- EWSs are common in many industries and have a number of other names -- predictive 
+analytics, risk models, or machine learning
+- In education the most common EWS projects the likelihood a student will dropout 
+before completing high school
+- Famous and successful examples include: The Chicago Consortium on School Research 
+model, the BetterHighSchools.org EWI tool, and the Edwin Analytics suite in MA
+
+## What Features Matter in an EWS?
+
+- **Early** identification in time to make interventions
+- **Accurately** identifying students who need assistance and those who do not
+- **Transparency** in how predictions were made and how students are labeled
+- **Reproducibility** in the predictions so they vary with changes in underlying behaviors 
+not the models
+- **Scaleable** to a diverse array of student and school contexts
+
+## Why accuracy? 
+
+**Opportunity cost**
+
+>- Accuracy matters tremendously at scale. 
+>- 1,000 schools receiving on average 240 predictions each. 
+>- Each prediction reviewed by 3-5 staff for ~5 minutes
+>- 3 x 240 x $\frac{1}{12}$ = 60 hours
+>- 5 x 240 x $\frac{1}{12}$ = 100 hours
+>- Across 1,000 schools thats 60,000 to 100,000 hours of work 
+>- This could cost from $1 million to $4 million annually
+
+## What does accuracy mean?
+
+- Correct classification of a student as a future dropout means we cannot measure 
+accuracy with a single number and be accurate
+- Classification metrics must incorporate the trade-off between different types 
+of misclassification
+
+## Metrics of Model Fit
+
+- In the continuous case, Root Mean Square Error (RMSE)
+- In the discrete case, there are a number of options including kappa, 
+ROC, AUC, and others
+- ROC: Receiver Operating Characteristic, AUC: Area Under the (ROC) Curve
+- Many of these metrics can be extended to the multi-class case as well
+
+## Confusion Matrix: Classification
+
+<small>
+<table>
+<tr>
+<td colspan="2" rowspan="2"></td>
+<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+</tr>
+<tr>
+<td>Non-grad</td>
+<td>Graduate</td>
+</tr>
+<tr>
+<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td>Non-grad</td>
+<td><b>a</b></td>
+<td><b>b</b></td>
+</tr>
+<tr>
+<td>Graduate</td>
+<td><b>c</b></td>
+<td><b>d</b></td>
+</tr>
+</table>
+</small>
+
+Some performance metrics we can use:
+- Accuracy: $\frac{(a+d)}{(a+b+c+d)}$
+- Precision (positive predictive value) = $\frac{a}{(a+b)}$
+- Sensitivity (recall) = $\frac{a}{(a+c)}$
+- Specificity (negative predictive value) = $\frac{d}{(b+d)}$
+- False alarm (1-specificity) = $\frac{b}{(b+d)}$
+
+## Confusion Matrix: Accuracy
+
+<table>
+<tr>
+<td colspan="2" rowspan="2"></td>
+<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+</tr>
+<tr>
+<td>Non-grad</td>
+<td>Graduate</td>
+</tr>
+<tr>
+<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td>Non-grad</td>
+<td  style="background-color:#c3cb71; border: 2px solid #ead61c"><b>a</b></td>
+<td><b>b</b></td>
+</tr>
+<tr>
+<td>Graduate</td>
+<td><b>c</b></td>
+<td style="background-color:#c3cb71; border: 2px solid #ead61c"><b>d</b></td>
+</tr>
+</table>
+
+- Accuracy: $\frac{(a+d)}{(a+b+c+d)}$
+- Accuracy is a good measure if our classes are fairly balanced and we care about 
+overall correctly dividing the data into the groups. 
+- If one group is much larger than another though, this method can be misleading.
+
+## Confusion Matrix: Precision
+
+<table>
+<tr>
+<td colspan="2" rowspan="2"></td>
+<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+</tr>
+<tr>
+<td>Non-grad</td>
+<td>Graduate</td>
+</tr>
+<tr>
+<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td>Non-grad</td>
+<td  style="background-color:#c3cb71; border: 2px solid #ead61c"><b>a</b></td>
+<td  style="background-color:#c3cb71; border: 2px solid #ead61c"><b>b</b></td>
+</tr>
+<tr>
+<td>Graduate</td>
+<td><b>c</b></td>
+<td><b>d</b></td>
+</tr>
+</table>
+
+Precision (negative predictive value) = $\frac{a}{(a+b)}$
+
+- Of all the cases we predict to be **non-graduates**, what proportion actually graduate?
+- If we are interested in the **non-graduate** class, then this is a very useful metric 
+to understand how good we are at identifying this group. Useful if this class is a rare 
+class.
+
+## Confusion Matrix: Sensitivity
+
+<table>
+<tr>
+<td colspan="2" rowspan="2"></td>
+<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+</tr>
+<tr>
+<td>Non-grad</td>
+<td>Graduate</td>
+</tr>
+<tr>
+<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td>Non-grad</td>
+<td  style="background-color:#c3cb71; border: 2px solid #ead61c"><b>a</b></td>
+<td ><b>b</b></td>
+</tr>
+<tr>
+<td>Graduate</td>
+<td style="background-color:#c3cb71; border: 2px solid #ead61c"><b>c</b></td>
+<td><b>d</b></td>
+</tr>
+</table>
+
+Sensitivity (recall) = $\frac{a}{(a+c)}$
+
+- Of all the **non-graduate** cases, what percentage do we correctly identify (recall)?
+- Useful if we are interested in rare-event models where we want to accurately 
+identify rare events, and are less worried about how accurate we are with the modal 
+or common case. 
+
+## Confusion Matrix: Specificity
+
+<table>
+<tr>
+<td colspan="2" rowspan="2"></td>
+<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+</tr>
+<tr>
+<td>Non-grad</td>
+<td>Graduate</td>
+</tr>
+<tr>
+<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td>Non-grad</td>
+<td><b>a</b></td>
+<td style="background-color:#c3cb71; border: 2px solid #ead61c"><b>b</b></td>
+</tr>
+<tr>
+<td>Graduate</td>
+<td><b>c</b></td>
+<td style="background-color:#c3cb71; border: 2px solid #ead61c"><b>d</b></td>
+</tr>
+</table>
+
+- Specificity (positive predictive value) = $\frac{d}{(b+d)}$
+- False alarm (1-specificity) = $\frac{b}{(b+d)}$
+- Of all the **graduate** cases, what proportion actually do we predict correctly?
+- If we are interested in one class, this metric is either interesting on its own, 
+or as the balancing metric (false alarm) that we seek to hold constant while 
+increasing our sensitivity. 
+
+## Receiver Operating Characteristic
+
+<img src="img/Roccurves.png" title="ROC" alt="FP" style="display: block; margin:0 auto; height:auto; width:auto; max-width:300px; max-height:300px" />
+
+- <small>ROC represents the tradeoff between the fraction of non-graduates identified out of 
+all non-graduates, and the fraction of false non-graduates out of all graduates </small>
+- <small>Can represent the variation in classification accuracy as the discrimination threshold 
+is varied
+- Can support decision analysis by allowing a decision to be made explicitly about the 
+balance between false-positives and false-negatives
+- Excellent for optimizing rare-class identification
+</small>
+
+## What is out there? {.flexbox .vcenter}
+
+<div class="centered">
+![EWS Plots](img/ewsLITplot.png)
+</div>
+
 
