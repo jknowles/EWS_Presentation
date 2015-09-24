@@ -52,18 +52,6 @@ model, the BetterHighSchools.org EWI tool, and the Edwin Analytics suite in MA
 not the models
 - **Scaleable** to a diverse array of student and school contexts
 
-## Why accuracy? 
-
-**Opportunity cost**
-
->- Accuracy matters tremendously at scale. 
->- 1,000 schools receiving on average 240 predictions each. 
->- Each prediction reviewed by 3-5 staff for ~5 minutes
->- 3 x 240 x $\frac{1}{12}$ = 60 hours
->- 5 x 240 x $\frac{1}{12}$ = 100 hours
->- Across 1,000 schools thats 60,000 to 100,000 hours of work 
->- This could cost from $1 million to $4 million annually
-
 ## What does accuracy mean?
 
 - Correct classification of a student as a future dropout means we cannot measure 
@@ -117,22 +105,22 @@ Some performance metrics we can use:
 <table>
 <tr>
 <td colspan="2" rowspan="2"></td>
-<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+<td colspan="2" style="background-color:#1b85b8; border: 2px solid">Actual</td>			
 </tr>
 <tr>
 <td>Non-grad</td>
 <td>Graduate</td>
 </tr>
 <tr>
-<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td rowspan="2" style="background-color:#ae5a41; border: 2px solid">Predicted</td>
 <td>Non-grad</td>
-<td  style="background-color:#c3cb71; border: 2px solid #ead61c"><b>a</b></td>
+<td  style="background-color:#c3cb71; border: 2px solid"><b>a</b></td>
 <td><b>b</b></td>
 </tr>
 <tr>
 <td>Graduate</td>
 <td><b>c</b></td>
-<td style="background-color:#c3cb71; border: 2px solid #ead61c"><b>d</b></td>
+<td style="background-color:#c3cb71; border: 2px solid"><b>d</b></td>
 </tr>
 </table>
 
@@ -146,17 +134,17 @@ overall correctly dividing the data into the groups.
 <table>
 <tr>
 <td colspan="2" rowspan="2"></td>
-<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+<td colspan="2" style="background-color:#1b85b8; border: 2px solid">Actual</td>			
 </tr>
 <tr>
 <td>Non-grad</td>
 <td>Graduate</td>
 </tr>
 <tr>
-<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td rowspan="2" style="background-color:#ae5a41; border: 2px solid">Predicted</td>
 <td>Non-grad</td>
-<td  style="background-color:#c3cb71; border: 2px solid #ead61c"><b>a</b></td>
-<td  style="background-color:#c3cb71; border: 2px solid #ead61c"><b>b</b></td>
+<td  style="background-color:#c3cb71; border: 2px solid"><b>a</b></td>
+<td  style="background-color:#c3cb71; border: 2px solid"><b>b</b></td>
 </tr>
 <tr>
 <td>Graduate</td>
@@ -177,21 +165,21 @@ class.
 <table>
 <tr>
 <td colspan="2" rowspan="2"></td>
-<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+<td colspan="2" style="background-color:#1b85b8; border: 2px solid">Actual</td>			
 </tr>
 <tr>
 <td>Non-grad</td>
 <td>Graduate</td>
 </tr>
 <tr>
-<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td rowspan="2" style="background-color:#ae5a41; border: 2px solid">Predicted</td>
 <td>Non-grad</td>
-<td  style="background-color:#c3cb71; border: 2px solid #ead61c"><b>a</b></td>
+<td  style="background-color:#c3cb71; border: 2px solid"><b>a</b></td>
 <td ><b>b</b></td>
 </tr>
 <tr>
 <td>Graduate</td>
-<td style="background-color:#c3cb71; border: 2px solid #ead61c"><b>c</b></td>
+<td style="background-color:#c3cb71; border: 2px solid"><b>c</b></td>
 <td><b>d</b></td>
 </tr>
 </table>
@@ -208,22 +196,22 @@ or common case.
 <table>
 <tr>
 <td colspan="2" rowspan="2"></td>
-<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+<td colspan="2" style="background-color:#1b85b8; border: 2px solid">Actual</td>			
 </tr>
 <tr>
 <td>Non-grad</td>
 <td>Graduate</td>
 </tr>
 <tr>
-<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td rowspan="2" style="background-color:#ae5a41; border: 2px solid">Predicted</td>
 <td>Non-grad</td>
 <td><b>a</b></td>
-<td style="background-color:#c3cb71; border: 2px solid #ead61c"><b>b</b></td>
+<td style="background-color:#c3cb71; border: 2px solid"><b>b</b></td>
 </tr>
 <tr>
 <td>Graduate</td>
 <td><b>c</b></td>
-<td style="background-color:#c3cb71; border: 2px solid #ead61c"><b>d</b></td>
+<td style="background-color:#c3cb71; border: 2px solid"><b>d</b></td>
 </tr>
 </table>
 
@@ -238,19 +226,72 @@ increasing our sensitivity.
 
 <img src="img/Roccurves.png" title="ROC" alt="FP" style="display: block; margin:0 auto; height:auto; width:auto; max-width:300px; max-height:300px" />
 
-- <small>ROC represents the tradeoff between the fraction of non-graduates identified out of 
-all non-graduates, and the fraction of false non-graduates out of all graduates </small>
-- <small>Can represent the variation in classification accuracy as the discrimination threshold 
-is varied
+- ROC represents the tradeoff between the fraction of non-graduates identified out of 
+all non-graduates, and the fraction of false non-graduates out of all graduates 
 - Can support decision analysis by allowing a decision to be made explicitly about the 
 balance between false-positives and false-negatives
 - Excellent for optimizing rare-class identification
-</small>
 
 ## What is out there? {.flexbox .vcenter}
+
+<small>Adapted from Bowers, Sprott, and Taff 2013</small> 
 
 <div class="centered">
 ![EWS Plots](img/ewsLITplot.png)
 </div>
 
+## Why accuracy? 
 
+**Opportunity cost**
+
+>- Accuracy matters tremendously at scale. 
+>- 1,000 schools receiving on average 240 predictions each. 
+>- Each prediction reviewed by 3-5 staff for ~5 minutes
+>- 3 x 240 x $\frac{1}{12}$ = 60 hours
+>- 5 x 240 x $\frac{1}{12}$ = 100 hours
+>- Across 1,000 schools thats 60,000 to 100,000 hours of work 
+>- This could cost from $1 million to $4 million annually
+
+## Machine Learning
+
+- In Wisconsin we are looking to make tens of thousands of bi-annual predictions and 
+asking educators to pay attention to them
+- Start with some more basic models, build complexity in order to increase 
+accuracy
+
+```{r echo=FALSE, fig.height=4, fig.width=5.5, fig.align='center', fig.cap="Figure Adapted from James et al. 2013", message=FALSE, warning=FALSE}
+library(eeptools)
+x    <- c(1, 2, 3, 4, 5, 6, 7, 8)
+y    <- c(14, 12, 10, 8, 6, 4, 2, 0)
+
+jitter <- function(x) x + runif(1, min=-.5, max=.5)
+x <- sapply(x, jitter)
+y <- sapply(y, jitter)
+
+labs <- c("Lasso", "Subset Selection", "Least Squares", 
+          "Generalized Linear Models", "KNN", "Trees", "Bagging, Boosting", 
+          "SVM")
+
+qplot(x, y, geom='text', label=labs) + theme_classic() + 
+  scale_x_continuous("Flexibility", limits=c(min(x) - 0.5, max(x) + 0.5)) +
+  scale_y_continuous("Interpretability", limits=c(min(y) - 0.5, max(y) + 0.5)) +
+  labs(title="Functional Forms and Tradeoffs") + theme_dpi(base_size=16) +
+  theme(axis.text=element_blank(), axis.ticks=element_blank())
+```
+
+## Some Early Results
+
+
+## Challenges with Machine Learning 
+
+- Hard to interpret results
+- Difficult to get stability
+- Concerns with the "black box"
+
+
+## Overcoming those Challenges
+
+- Communication, communication, communication
+- Everyone agrees that accuracy is the priority, so the complexity is required
+- Find ways to make complexity approachable, digestable, and trustable
+- Transparency is key
