@@ -1,41 +1,86 @@
-  .reveal h1 { font-size: 1.8em; }
-  .reveal blockquote {
-  display: block;
-	position: relative;
-	width: 70%;
-	margin: 5px auto;
-  font-size: 140%;
-
-	font-style: normal;
-	background: rgb(160, 160, 160, 0.5);
-	box-shadow: 0 0 2px rgba(0,0,0,0.5);
+slide{
+  background-color: black;
 }
-	.reveal blockquote p:first-child,
-	.reveal blockquote p:last-child {
-		display: inline-block;
-	}
-	p{
-	  color: black;
-	}
-	li{
-	  color: black;
-	}
-	
-	h1{
-	  color: black;
-	}
-	h2{
-	  color: black;
-	}
-	h3{
-	  color: black;
-	}
-	hgroup{
-	  color: black;
-	}
-	
+
+body, p, td, li, div, ol, ul {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 22pt;
+  color: white;
+  background: black;
+  background-color: black;
+  line-height: 1.1;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: white;
+  background-color: black;
+}
+
+blockquote {
+  background: black;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+
+section del {
+  color: red;
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+pre {   
+  margin-top: 0;
+  max-width: 95%;
+  border: 1px solid #ccc;
+  white-space: pre-wrap;
+  margin-bottom: 1em; 
+  color: black;
+}
+
+a:not(.image) {
+  color: red;
+  text-decoration: none;
+  -webkit-transition: color .15s ease;
+  -moz-transition: color .15s ease;
+  -ms-transition: color .15s ease;
+  -o-transition: color .15s ease;
+  transition: color .15s ease; }
+
+a:not(.image):hover {
+  color: #0000f1;
+  text-shadow: none;
+  border: none; }
+
+roll span:after {
+  color: #fff;
+  background: #00003f; }
+
+pre code {
+  display: block; padding: 0.5em;
+  font-size: 1.6em;
+  line-height: 1.1em;
+  background-color: white;
+  overflow: visible;
+  max-height: none;
+  word-wrap: normal;
+  color: black;
+}
+
 table, th, td {
-    border: 1px solid black;
+    font-family: "Lucida Console", Monaco, monospace;
+    border: 2px solid white;
+    color: white;
+    margin: 10px auto;
+    font-size: 105% !important;
 }
 
 th, td {

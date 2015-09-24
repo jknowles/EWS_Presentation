@@ -5,7 +5,6 @@ date: "September 21, 2015"
 output:
   ioslides_presentation:
     css: custom.css
-    smaller: true
     widescreen: true
 ---
 
@@ -82,18 +81,17 @@ ROC, AUC, and others
 
 ## Confusion Matrix: Classification
 
-<small>
-<table>
+<table style="float:center">
 <tr>
 <td colspan="2" rowspan="2"></td>
-<td colspan="2" style="background-color:#1b85b8; border: 2px solid #aaa">Actual</td>			
+<td colspan="2" style="background-color:#1b85b8">Actual</td>			
 </tr>
 <tr>
 <td>Non-grad</td>
 <td>Graduate</td>
 </tr>
 <tr>
-<td rowspan="2" style="background-color:#ae5a41; border: 2px solid #aaa">Predicted</td>
+<td rowspan="2" style="background-color:#ae5a41">Predicted</td>
 <td>Non-grad</td>
 <td><b>a</b></td>
 <td><b>b</b></td>
@@ -104,9 +102,10 @@ ROC, AUC, and others
 <td><b>d</b></td>
 </tr>
 </table>
-</small>
+
 
 Some performance metrics we can use:
+
 - Accuracy: $\frac{(a+d)}{(a+b+c+d)}$
 - Precision (positive predictive value) = $\frac{a}{(a+b)}$
 - Sensitivity (recall) = $\frac{a}{(a+c)}$
