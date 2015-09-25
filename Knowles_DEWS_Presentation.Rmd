@@ -42,15 +42,64 @@ analytics, risk models, or machine learning
 before completing high school
 - Famous and successful examples include: The Chicago Consortium on School Research 
 model, the BetterHighSchools.org EWI tool, and the Edwin Analytics suite in MA
+- Existing EWS models fall into three broad categories -- checklist, regression, 
+and mixture/latent variable models
 
-## What Features Matter in an EWS?
+## What does the research say? Checklist models {.small}
 
+- Checklist models are easy to implement, have been shown to have high out-of-sample 
+validity in some school settings (Heppen and Therriault, 2008; Kennelly and
+Monrad, 2007; Easton and Allensworth, 2005 & 2007; Roderick and Camburn, 1999; 
+Allensworth, 2013, Balfanz and Herzog, 2006; Balfanz and Iver, 2007)
+- The downside of such checklist based systems is that they tend to overemphasize individual
+attributes like grades or attendance at the risk of oversimplifying the mechanisms underlying
+students’ risk of dropping out (Gleason and Dynarski, 2002). Often, educators are not given
+a strong sense of how well such indicator systems perform and, thus, may not find it easy to
+weigh the results of such a checklist against other evidence available to them through classroom
+observation, student interactions, or a short interview with the student.
+
+## What does the research say? Regression models
+
+- Carl et al. (2013) use regression models to estimate a student’s probability of
+high school completion conditional on the number and type of credits earned in the freshman
+year. The authors’ conclude in creating a new measure, Total Quality Credits (TQC), whic is a
+combination of course grades in the four core subjects and is highly predictive of both on-time
+high school completion and college enrollment.
+- Regression models have been shown to be flexible to multiple school contexts, 
+but have higher data requirements
+
+
+## What does the research say? Mixture/Latent Variable Models
+
+- Most accurate models
+- Muthen (2004). Bowers and Sprott (2012a) builds on this work by extending the GMM methodology
+to a nationally representative data set (the Education Longitudinal Study of 2002) and tying
+the model to existing theories of student disengagement and dropout. Bowers and Sprott
+(2012a) found that even when limiting the GMM to data available to most school staff, the
+model provides highly accurate predictions of individual students’ high school completion.
+- Mixture/latent variable models are highly accurate, have demanding data requirements, 
+and have not been proven out-of-sample (Muthen 2004)
+
+## What do we want from an EWS?
 - **Early** identification in time to make interventions
 - **Accurately** identifying students who need assistance and those who do not
 - **Transparency** in how predictions were made and how students are labeled
 - **Reproducibility** in the predictions so they vary with changes in underlying behaviors 
 not the models
 - **Scaleable** to a diverse array of student and school contexts
+
+## Comparing and contrasting apples to apples
+
+- There has been too much inconsistency in the application of accuracy metrics
+to make comparisons useful and to identify where such indicators draw the line between correct
+classification of non-graduates and false alarm rates (Gleason and Dynarski, 2002; Jerald, 2006;
+Bowers et al., 2013). 
+- As Bowers et al. (2013) indicate, most of the 110 at-risk flags found in the 
+literature only include a measure of the sensitivity, or the specificity, but rarely both. 
+- In an effort to bring cohesion and clarity to the comparison of EWIs, Bowers
+et al. (2013) calculated the performance metrics for 110 separate EWIs found in the 
+literature.
+
 
 ## What does accuracy mean?
 
@@ -239,6 +288,14 @@ balance between false-positives and false-negatives
 <div class="centered">
 ![EWS Plots](img/ewsLITplot.png)
 </div>
+
+## The DEWS Workflow
+
+<div class="centered">
+![DEWS Workflow](img/DEWS_workflow_diagram.png)
+</div>
+
+
 
 ## Why accuracy? 
 
