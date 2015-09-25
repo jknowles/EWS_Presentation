@@ -61,7 +61,7 @@ a:not(.image):hover {
   border: none; }
 
 roll span:after {
-  color: #fff;
+  color: blue;
   background: #00003f; }
 
 pre code {

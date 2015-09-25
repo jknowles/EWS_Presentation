@@ -1,12 +1,21 @@
 ---
-title: "Using Machine Learning to Identify Dropouts At Scale"
+title: "Of Needles and Haystacks: Building a Statewide Dropout Early Warning System"
 author: "Jared E. Knowles"
-date: "September 21, 2015"
+date: "September 28, 2015"
 output:
   ioslides_presentation:
     css: custom.css
     widescreen: true
+    self contained: true
+    fig_width: 8
+    fig_height: 8
 ---
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+library(knitr)
+opts_chunk$set(dev="png", 
+               echo=FALSE, warning=FALSE, message=FALSE, dpi=68)
+```
 
 ## The Problem in Predicting School Dropout
 
@@ -285,17 +294,30 @@ balance between false-positives and false-negatives
 
 <small>Adapted from Bowers, Sprott, and Taff 2013</small> 
 
-<div class="centered">
-![EWS Plots](img/ewsLITplot.png)
-</div>
+```{r ewslitplot, fig.align='center', fig.height=7, fig.width=9.5}
+library(png)
+library(grid)
+img <- readPNG("img/ewsLITplot2.png")
+grid.raster(img, interpolate = TRUE)
+```
+
+## What does this mean in Wisconsin?
+
+- Working statewide means we have a lot of observations, but a dearth of measures
+- WI has a high graduation rate, so there is a needle in a haystack problem 
+
 
 ## The DEWS Workflow
 
-<div class="centered">
-![DEWS Workflow](img/DEWS_workflow_diagram.png)
-</div>
-
-
+```{r echo=FALSE, fig.align='center', fig.height=7, fig.width=9.5}
+library(png)
+library(grid)
+img <- readPNG("img/DEWS_workflow_diagram.png")
+grid.raster(img)
+# <div style="width:300px; height:200px; align:center">
+# ![DEWS Workflow](img/DEWS_workflow_diagram.png)
+# </div>
+```
 
 ## Why accuracy? 
 
@@ -314,9 +336,9 @@ balance between false-positives and false-negatives
 - In Wisconsin we are looking to make tens of thousands of bi-annual predictions and 
 asking educators to pay attention to them
 - Start with some more basic models, build complexity in order to increase 
-accuracy
+accuracy (James et al. 2013)
 
-```{r echo=FALSE, fig.height=4, fig.width=5.5, fig.align='center', fig.cap="Figure Adapted from James et al. 2013", message=FALSE, warning=FALSE}
+```{r echo=FALSE, fig.height=4, fig.width=6, fig.align='center', message=FALSE, warning=FALSE}
 library(eeptools)
 x    <- c(1, 2, 3, 4, 5, 6, 7, 8)
 y    <- c(14, 12, 10, 8, 6, 4, 2, 0)
@@ -336,7 +358,53 @@ qplot(x, y, geom='text', label=labs) + theme_classic() +
   theme(axis.text=element_blank(), axis.ticks=element_blank())
 ```
 
-## Some Early Results
+
+## Logit/Probit Model Performance
+
+
+```{r glmperf, echo=FALSE, fig.align='center'}
+library(png)
+library(grid)
+img <- readPNG("img/ROCforGLM.png")
+grid.raster(img)
+```
+
+## Caret Model Performance
+
+```{r algoperf, echo=FALSE, fig.align='center'}
+library(png)
+library(grid)
+img <- readPNG("img/caretROCs.png")
+grid.raster(img)
+```
+
+
+## Ensemble Performance
+
+```{r ensembleperf, echo=FALSE, fig.align='center'}
+library(png)
+library(grid)
+img <- readPNG("img/ensembleROC.png")
+grid.raster(img)
+```
+
+## Test Data Performance
+
+```{r testdatperf, echo=FALSE, fig.align='center'}
+library(png)
+library(grid)
+img <- readPNG("img/testDataROCs.png")
+grid.raster(img)
+```
+
+## Peaking Under the Black Box
+
+```{r varimp, echo=FALSE, fig.align='center', fig.height=8.2, fig.width=7.8}
+library(png)
+library(grid)
+img <- readPNG("img/VariableImportance.png")
+grid.raster(img)
+```
 
 
 ## Challenges with Machine Learning 
@@ -352,3 +420,11 @@ qplot(x, y, geom='text', label=labs) + theme_classic() +
 - Everyone agrees that accuracy is the priority, so the complexity is required
 - Find ways to make complexity approachable, digestable, and trustable
 - Transparency is key
+
+## Contact Info
+
+- DEWS Homepage: [http://www.dpi.wi.gov/dews](http://www.dpi.wi.gov/dews)
+- E-mail: jknowles@gmail.com
+- GitHub: [http://www.github.com/jknowles](http://www.github.com/jknowles)
+- Homepage: [www.jaredknowles.com](http://www.jaredknowles.com/)
+- Twitter: @jknowles
