@@ -301,6 +301,21 @@ img <- readPNG("img/ewsLITplot2.png")
 grid.raster(img, interpolate = TRUE)
 ```
 
+## What we really want to know
+- We actually are nto interested much in the accuracy within the sample, which 
+the prior literature focuses on
+- We want to *estimate* the likely accuracy on students we are making predictions 
+for today
+- This is critical to inform stakeholders about the appropriate weight to give 
+the evidence provided by the DEWS score
+- A number of statistical techniques can help with this
+
+## Estimating out-of-sample error rates
+- Unlike model fit statistics such as AIC, BIC, and $R^{2}$, out of sample 
+fit statistics require re-estimation of the model
+- Techniques for this 
+
+
 ## What does this mean in Wisconsin?
 
 - Working statewide means we have a lot of observations, but a dearth of measures
@@ -358,9 +373,19 @@ qplot(x, y, geom='text', label=labs) + theme_classic() +
   theme(axis.text=element_blank(), axis.ticks=element_blank())
 ```
 
+## Predictors
+- Starting with the Balfanz ABC predictors for middle grades, look for data 
+available longitudinally in the SLDS
+- Replace grades with assessment scores
+- Use attendance rate and disciplinary incidents
+- Add mobility
+- Add contextual variables
+- Add demographic variables
+
+
+## A word on data preparation
 
 ## Logit/Probit Model Performance
-
 
 ```{r glmperf, echo=FALSE, fig.align='center'}
 library(png)
@@ -397,6 +422,53 @@ img <- readPNG("img/testDataROCs.png")
 grid.raster(img)
 ```
 
+## Combined Test and Training Data Results
+
+Confusion Matrix  | Observed Grad | Observed Non. Grad
+------------- | ------------- | -------------------
+Pred. Grad.   | 84,744        | 3,670 
+Pred. Non. Grad. | 13,718     | 7,454
+
+## Challenges with Machine Learning 
+
+- Hard to interpret results
+- Difficult to get stability
+- Concerns with the "black box"
+
+## Overcoming those Challenges
+
+- Communication, communication, communication
+- Everyone agrees that accuracy is the priority, so the complexity is required
+- Find ways to make complexity approachable, digestable, and trustable
+- Transparency is key
+
+## Implementation
+
+- Not worth anything if predictions do not reach educators
+- Use state reporting tool to disseminate results + a rollout plan
+
+
+## Student Profile
+
+```{r stuprof, echo=FALSE, fig.align='center'}
+library(png)
+library(grid)
+img <- readPNG("img/studentprofile.png")
+grid.raster(img)
+```
+
+
+
+## DEWS Box Zoom
+
+```{r dewsbox=FALSE, fig.align='center'}
+library(png)
+library(grid)
+img <- readPNG("img/EWSPanel.png")
+grid.raster(img)
+```
+
+
 ## Peaking Under the Black Box
 
 ```{r varimp, echo=FALSE, fig.align='center', fig.height=8.2, fig.width=7.8}
@@ -407,19 +479,6 @@ grid.raster(img)
 ```
 
 
-## Challenges with Machine Learning 
-
-- Hard to interpret results
-- Difficult to get stability
-- Concerns with the "black box"
-
-
-## Overcoming those Challenges
-
-- Communication, communication, communication
-- Everyone agrees that accuracy is the priority, so the complexity is required
-- Find ways to make complexity approachable, digestable, and trustable
-- Transparency is key
 
 ## Contact Info
 

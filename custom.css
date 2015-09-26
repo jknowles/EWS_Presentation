@@ -1,3 +1,15 @@
+slides > slide.title-slide hgroup h1 {
+  font-weight: bold;
+  font-size: 40pt;
+  color: white;
+}
+
+slides > slide.title-slide p {
+  font-weight: bold;
+  font-size: 24pt;
+  color: white;
+}
+
 slide{
   background-color: black;
 }
@@ -75,6 +87,7 @@ pre code {
   color: black;
 }
 
+
 table, th, td {
     font-family: "Lucida Console", Monaco, monospace;
     border: 2px solid white;
@@ -83,6 +96,8 @@ table, th, td {
     font-size: 105% !important;
 }
 
-th, td {
+th, td, tr{
     padding: 10px;
+    color: white;
+    background-color: black;
 }
