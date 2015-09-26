@@ -31,7 +31,7 @@ all models inefficient, biased, or both.
 4. Teachers, counselors, principals, and other school staff are spending valuable 
 time assessing student dropout likelihood using manual identification. 
 
-**Early warning systems promise to reduce this burden and increase accuracy.**
+**State level early warning systems can help with this**
 
 ## Outline
 
@@ -47,10 +47,6 @@ time assessing student dropout likelihood using manual identification.
 explain the likelihood of a future outcome using data available today
 - EWSs are common in many industries and have a number of other names -- predictive 
 analytics, risk models, or machine learning
-- In education the most common EWS projects the likelihood a student will dropout 
-before completing high school
-- Famous and successful examples include: The Chicago Consortium on School Research 
-model, the BetterHighSchools.org EWI tool, and the Edwin Analytics suite in MA
 - Existing EWS models fall into three broad categories -- checklist, regression, 
 and mixture/latent variable models
 
@@ -62,10 +58,11 @@ Monrad, 2007; Easton and Allensworth, 2005 & 2007; Roderick and Camburn, 1999;
 Allensworth, 2013, Balfanz and Herzog, 2006; Balfanz and Iver, 2007)
 - The downside of such checklist based systems is that they tend to overemphasize individual
 attributes like grades or attendance at the risk of oversimplifying the mechanisms underlying
-students’ risk of dropping out (Gleason and Dynarski, 2002). Often, educators are not given
-a strong sense of how well such indicator systems perform and, thus, may not find it easy to
-weigh the results of such a checklist against other evidence available to them through classroom
-observation, student interactions, or a short interview with the student.
+students’ risk of dropping out (Gleason and Dynarski, 2002). 
+- Often, educators are not given a strong sense of how well such indicator systems 
+perform and, thus, may not find it easy to weigh the results of such a checklist 
+against other evidence available to them through classroom observation, 
+student interactions, or a short interview with the student.
 
 ## What does the research say? Regression models
 
@@ -76,11 +73,11 @@ combination of course grades in the four core subjects and is highly predictive 
 high school completion and college enrollment.
 - Regression models have been shown to be flexible to multiple school contexts, 
 but have higher data requirements
-
+- Including multiple indicators is a benefit (Balfanz)
 
 ## What does the research say? Mixture/Latent Variable Models
 
-- Most accurate models
+- Most accurate models evaluated
 - Muthen (2004). Bowers and Sprott (2012a) builds on this work by extending the GMM methodology
 to a nationally representative data set (the Education Longitudinal Study of 2002) and tying
 the model to existing theories of student disengagement and dropout. Bowers and Sprott
@@ -90,6 +87,7 @@ model provides highly accurate predictions of individual students’ high school
 and have not been proven out-of-sample (Muthen 2004)
 
 ## What do we want from an EWS?
+
 - **Early** identification in time to make interventions
 - **Accurately** identifying students who need assistance and those who do not
 - **Transparency** in how predictions were made and how students are labeled
@@ -100,15 +98,13 @@ not the models
 ## Comparing and contrasting apples to apples
 
 - There has been too much inconsistency in the application of accuracy metrics
-to make comparisons useful and to identify where such indicators draw the line between correct
-classification of non-graduates and false alarm rates (Gleason and Dynarski, 2002; Jerald, 2006;
+to make comparisons useful (Gleason and Dynarski, 2002; Jerald, 2006;
 Bowers et al., 2013). 
 - As Bowers et al. (2013) indicate, most of the 110 at-risk flags found in the 
 literature only include a measure of the sensitivity, or the specificity, but rarely both. 
 - In an effort to bring cohesion and clarity to the comparison of EWIs, Bowers
 et al. (2013) calculated the performance metrics for 110 separate EWIs found in the 
-literature.
-
+literature
 
 ## What does accuracy mean?
 
@@ -120,8 +116,7 @@ of misclassification
 ## Metrics of Model Fit
 
 - In the continuous case, Root Mean Square Error (RMSE)
-- In the discrete case, there are a number of options including kappa, 
-ROC, AUC, and others
+- In the discrete case, there are a number of options including kappa, ROC, AUC, and others
 - ROC: Receiver Operating Characteristic, AUC: Area Under the (ROC) Curve
 - Many of these metrics can be extended to the multi-class case as well
 
