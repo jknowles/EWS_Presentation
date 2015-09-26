@@ -10,6 +10,10 @@ slides > slide.title-slide p {
   color: white;
 }
 
+slides > slide:not(.nobackground):after {
+  color: white;
+}
+
 slide{
   background-color: black;
 }

@@ -43,84 +43,69 @@ time assessing student dropout likelihood using manual identification.
 
 ## The What of Early Warning Systems
 
-- An Early Warning System (EWS) is simply a predictive system seeking to 
-explain the likelihood of a future outcome using data available today
 - EWSs are common in many industries and have a number of other names -- predictive 
 analytics, risk models, or machine learning
+- Schools currently do a lot of work around identifying students-at-risk in 
+response to federal and state laws and definitions
+- EWS has traditionally been thought of as a high school tool, but is increasingly 
+being introduced into middle school and earlier (Balfanz and Herzog 2006)
 - Existing EWS models fall into three broad categories -- checklist, regression, 
 and mixture/latent variable models
 
-## What does the research say? Checklist models {.small}
+## What does the research say? Checklist models
 
 - Checklist models are easy to implement, have been shown to have high out-of-sample 
 validity in some school settings (Heppen and Therriault, 2008; Kennelly and
 Monrad, 2007; Easton and Allensworth, 2005 & 2007; Roderick and Camburn, 1999; 
-Allensworth, 2013, Balfanz and Herzog, 2006; Balfanz and Iver, 2007)
+Allensworth, 2013, Balfanz and Herzog, 2006; Balfanz and Iver, 2007).
 - The downside of such checklist based systems is that they tend to overemphasize individual
 attributes like grades or attendance at the risk of oversimplifying the mechanisms underlying
 students’ risk of dropping out (Gleason and Dynarski, 2002). 
 - Often, educators are not given a strong sense of how well such indicator systems 
 perform and, thus, may not find it easy to weigh the results of such a checklist 
-against other evidence available to them through classroom observation, 
-student interactions, or a short interview with the student.
+against other evidence available to them.
+- Hard to validate locally
 
 ## What does the research say? Regression models
 
+- When using multiple indicators, regression techniques can provide a way to 
+combine estimates and to validate indicators.
 - Carl et al. (2013) use regression models to estimate a student’s probability of
 high school completion conditional on the number and type of credits earned in the freshman
-year. The authors’ conclude in creating a new measure, Total Quality Credits (TQC), whic is a
-combination of course grades in the four core subjects and is highly predictive of both on-time
-high school completion and college enrollment.
+year.
 - Regression models have been shown to be flexible to multiple school contexts, 
-but have higher data requirements
-- Including multiple indicators is a benefit (Balfanz)
+but have higher data requirements -- weighting of different indicators hard to 
+implement on the fly.
 
 ## What does the research say? Mixture/Latent Variable Models
 
-- Most accurate models evaluated
-- Muthen (2004). Bowers and Sprott (2012a) builds on this work by extending the GMM methodology
-to a nationally representative data set (the Education Longitudinal Study of 2002) and tying
-the model to existing theories of student disengagement and dropout. Bowers and Sprott
-(2012a) found that even when limiting the GMM to data available to most school staff, the
-model provides highly accurate predictions of individual students’ high school completion.
+- Growth mixture models of math achievement growth are highly accurate in predicting 
+dropout (Muthén 2004).
+- Bowers and Sprott (2012) found that even when limiting the GMM to data 
+available to most school staff, the model provides highly accurate predictions 
+of individual students’ high school completion.
 - Mixture/latent variable models are highly accurate, have demanding data requirements, 
-and have not been proven out-of-sample (Muthen 2004)
+and have not been proven out-of-sample (Muthén 2004)
 
-## What do we want from an EWS?
+## Choosing an EWS Statewide
 
-- **Early** identification in time to make interventions
+**What do we want from an EWS?**
+
+- **Early** identification in time to make interventions (grades5-8)
 - **Accurately** identifying students who need assistance and those who do not
 - **Transparency** in how predictions were made and how students are labeled
 - **Reproducibility** in the predictions so they vary with changes in underlying behaviors 
 not the models
 - **Scaleable** to a diverse array of student and school contexts
 
-## Comparing and contrasting apples to apples
-
-- There has been too much inconsistency in the application of accuracy metrics
-to make comparisons useful (Gleason and Dynarski, 2002; Jerald, 2006;
-Bowers et al., 2013). 
-- As Bowers et al. (2013) indicate, most of the 110 at-risk flags found in the 
-literature only include a measure of the sensitivity, or the specificity, but rarely both. 
-- In an effort to bring cohesion and clarity to the comparison of EWIs, Bowers
-et al. (2013) calculated the performance metrics for 110 separate EWIs found in the 
-literature
-
 ## What does accuracy mean?
 
-- Correct classification of a student as a future dropout means we cannot measure 
-accuracy with a single number and be accurate
-- Classification metrics must incorporate the trade-off between different types 
-of misclassification
+- Accuracy in binary classification is inherently a tradeoff between different 
+types of error
+- Accuracy of classification metrics must incorporate the trade-off between 
+different types of misclassification
 
-## Metrics of Model Fit
-
-- In the continuous case, Root Mean Square Error (RMSE)
-- In the discrete case, there are a number of options including kappa, ROC, AUC, and others
-- ROC: Receiver Operating Characteristic, AUC: Area Under the (ROC) Curve
-- Many of these metrics can be extended to the multi-class case as well
-
-## Confusion Matrix: Classification
+## Confusion Matrix: Performance Matrix Choices
 
 <table style="float:center">
 <tr>
@@ -143,9 +128,6 @@ of misclassification
 <td><b>d</b></td>
 </tr>
 </table>
-
-
-Some performance metrics we can use:
 
 - Accuracy: $\frac{(a+d)}{(a+b+c+d)}$
 - Precision (positive predictive value) = $\frac{a}{(a+b)}$
@@ -206,12 +188,11 @@ overall correctly dividing the data into the groups.
 </tr>
 </table>
 
-Precision (negative predictive value) = $\frac{a}{(a+b)}$
-
-- Of all the cases we predict to be **non-graduates**, what proportion actually graduate?
-- If we are interested in the **non-graduate** class, then this is a very useful metric 
-to understand how good we are at identifying this group. Useful if this class is a rare 
-class.
+- Precision (negative predictive value) = $\frac{a}{(a+b)}$
+- Of all the cases we predict to be **non-graduates**, what proportion actually 
+fail to graduate?
+- If we are interested in the rarer **non-graduate** class, then this is a very useful metric 
+to understand how good we are at identifying this group. 
 
 ## Confusion Matrix: Sensitivity
 
@@ -237,8 +218,7 @@ class.
 </tr>
 </table>
 
-Sensitivity (recall) = $\frac{a}{(a+c)}$
-
+- Sensitivity (recall) = $\frac{a}{(a+c)}$
 - Of all the **non-graduate** cases, what percentage do we correctly identify (recall)?
 - Useful if we are interested in rare-event models where we want to accurately 
 identify rare events, and are less worried about how accurate we are with the modal 
@@ -268,22 +248,33 @@ or common case.
 </tr>
 </table>
 
-- Specificity (positive predictive value) = $\frac{d}{(b+d)}$
-- False alarm (1-specificity) = $\frac{b}{(b+d)}$
+- Specificity (positive predictive value) = $\frac{d}{(b+d)}$ or 
+false alarm (1-specificity) = $\frac{b}{(b+d)}$
 - Of all the **graduate** cases, what proportion actually do we predict correctly?
-- If we are interested in one class, this metric is either interesting on its own, 
-or as the balancing metric (false alarm) that we seek to hold constant while 
-increasing our sensitivity. 
+- This metric is useful as the balancing metric (false alarm) that we seek 
+to hold constant while increasing our sensitivity. 
+
+
+## Comparing and contrasting apples to apples
+
+- There has been too much inconsistency in the application of accuracy metrics
+to make comparisons useful (Gleason and Dynarski, 2002; Jerald, 2006;
+Bowers et al., 2013). 
+- Most of the 110 at-risk flags found in the  literature only include a measure 
+of the sensitivity, or the specificity, but rarely both Bowers et al. (2013).
+- In an effort to bring cohesion and clarity to the comparison of EWIs, Bowers
+et al. (2013) calculated the performance metrics for 110 separate EWIs found in the 
+literature
+
 
 ## Receiver Operating Characteristic
-
-<img src="img/Roccurves.png" title="ROC" alt="FP" style="display: block; margin:0 auto; height:auto; width:auto; max-width:300px; max-height:300px" />
 
 - ROC represents the tradeoff between the fraction of non-graduates identified out of 
 all non-graduates, and the fraction of false non-graduates out of all graduates 
 - Can support decision analysis by allowing a decision to be made explicitly about the 
 balance between false-positives and false-negatives
 - Excellent for optimizing rare-class identification
+
 
 ## What is out there? {.flexbox .vcenter}
 
@@ -297,36 +288,26 @@ grid.raster(img, interpolate = TRUE)
 ```
 
 ## What we really want to know
-- We actually are nto interested much in the accuracy within the sample, which 
-the prior literature focuses on
-- We want to *estimate* the likely accuracy on students we are making predictions 
+- Limitation is that in **most** cases these are merely measures of how the model 
+performed in-sample
+- We actually want to *estimate* the likely accuracy on students we are making predictions 
 for today
 - This is critical to inform stakeholders about the appropriate weight to give 
 the evidence provided by the DEWS score
-- A number of statistical techniques can help with this
+- Estimating accuracy on future data is a key feature of machine learning
 
 ## Estimating out-of-sample error rates
 - Unlike model fit statistics such as AIC, BIC, and $R^{2}$, out of sample 
 fit statistics require re-estimation of the model
-- Techniques for this 
+- Select a hold-out data set with observed outcome data and evaluate all models 
+on their performance with that data
+- Hard to do this locally, easier to do at state scale
 
-
-## What does this mean in Wisconsin?
-
-- Working statewide means we have a lot of observations, but a dearth of measures
-- WI has a high graduation rate, so there is a needle in a haystack problem 
-
-
-## The DEWS Workflow
-
-```{r echo=FALSE, fig.align='center', fig.height=7, fig.width=9.5}
+```{r cvtable, fig.align='center', fig.height=3, fig.width=9.5}
 library(png)
 library(grid)
-img <- readPNG("img/DEWS_workflow_diagram.png")
-grid.raster(img)
-# <div style="width:300px; height:200px; align:center">
-# ![DEWS Workflow](img/DEWS_workflow_diagram.png)
-# </div>
+img <- readPNG("img/cvtable.png")
+grid.raster(img, interpolate = TRUE)
 ```
 
 ## Why accuracy? 
@@ -341,7 +322,49 @@ grid.raster(img)
 >- Across 1,000 schools thats 60,000 to 100,000 hours of work 
 >- This could cost from $1 million to $4 million annually
 
-## Machine Learning
+## What does this mean in Wisconsin?
+
+- Trying to take advantage of economies of scale -- one big accurate analysis 
+disseminated statewide
+- Unfortunately working statewide means we have a lot of observations, but a 
+dearth of measures
+- Context matters greatly and modeling strategies need to be able to reflect 
+this context
+- WI has a high graduation rate, so there is a needle in a haystack problem 
+
+
+
+## The DEWS Workflow
+
+```{r echo=FALSE, fig.align='center', fig.height=7, fig.width=9.5}
+library(png)
+library(grid)
+img <- readPNG("img/DEWS_workflow_diagram.png")
+grid.raster(img)
+# <div style="width:300px; height:200px; align:center">
+# ![DEWS Workflow](img/DEWS_workflow_diagram.png)
+# </div>
+```
+
+## Wisconsin Variables
+
+```{r predtable, echo=FALSE, fig.align='center', fig.width=8, fig.height=3.5}
+library(png)
+library(grid)
+img <- readPNG("img/predictorTable.png")
+grid.raster(img)
+```
+
+
+## A word on data preparation
+
+- Defining who is a non-completer and who is a completer is difficult and essential 
+to success
+- Predictors should be transformed -- categories collapsed, numeric indicators 
+centered and scaled, zero-variance data elements dropped
+- Worth an entire paper to discuss challenges here (Kuhn 2013; James et al. 2012)
+
+## Modeling
 
 - In Wisconsin we are looking to make tens of thousands of bi-annual predictions and 
 asking educators to pay attention to them
@@ -368,17 +391,21 @@ qplot(x, y, geom='text', label=labs) + theme_classic() +
   theme(axis.text=element_blank(), axis.ticks=element_blank())
 ```
 
-## Predictors
-- Starting with the Balfanz ABC predictors for middle grades, look for data 
-available longitudinally in the SLDS
-- Replace grades with assessment scores
-- Use attendance rate and disciplinary incidents
-- Add mobility
-- Add contextual variables
-- Add demographic variables
+## Algorithm Search
 
+- Start with 35 candidate algorithms
+- Select 40,000 training observations and use 10 fold cross validation to tune 
+the parameters for each algorithm
+- Calculate the AUC on the test data for each algorithm
+- Toss out models with abnormally long run times for practical reasons
+- Select the top 5 to 8 models by AUC or by algorithmic diversity
 
-## A word on data preparation
+## Ensemble
+
+- Retrain the selected models with more data and a wider tuning parameter search
+- Ensemble the models into a meta-model
+- Calculate AUC on a validation data set (not the training or test set)
+- Store meta-model for later scoring of new cases
 
 ## Logit/Probit Model Performance
 
@@ -408,6 +435,14 @@ img <- readPNG("img/ensembleROC.png")
 grid.raster(img)
 ```
 
+## Why ensemble?
+
+- Not much added work beyond the above tasks
+- Hedges against overfit and borrows strength from diverse algorithms 
+(Kuncheva and Whitaker, 2003; Sollich and Krogh, 1996)
+- Lots of room for improvement here including optimizing a more sophisticated 
+meta-model beyond weighted average of individual predictions
+
 ## Test Data Performance
 
 ```{r testdatperf, echo=FALSE, fig.align='center'}
@@ -417,7 +452,27 @@ img <- readPNG("img/testDataROCs.png")
 grid.raster(img)
 ```
 
-## Combined Test and Training Data Results
+## Prediction
+
+- The whole ballgame is to make predictions on current students at scale
+- Need to assign them to a category (low, medium, high risk) based on predicted 
+probabilities
+- Calculate an optimal probability threshold by consulting with content experts 
+and determining that between 10 and 25 false-positives would be acceptable 
+for one less false-negative
+- The later the intervention (and prediction grade) the less acceptable false-positives 
+become
+
+## Algorithms Chosen By Grade
+
+```{r algotable, fig.align='center', fig.height=5, fig.width=8}
+library(png)
+library(grid)
+img <- readPNG("img/algotable.png")
+grid.raster(img, interpolate = TRUE)
+```
+
+## Combined Test and Training Data Results for Grade 7
 
 Confusion Matrix  | Observed Grad | Observed Non. Grad
 ------------- | ------------- | -------------------
@@ -441,11 +496,13 @@ Pred. Non. Grad. | 13,718     | 7,454
 
 - Not worth anything if predictions do not reach educators
 - Use state reporting tool to disseminate results + a rollout plan
-
+- Break score into risk bands of low, moderate, and high
+- Construct subscores based on **malleable** student factors of academics, 
+attendance, mobility, and behavior
 
 ## Student Profile
 
-```{r stuprof, echo=FALSE, fig.align='center'}
+```{r stuprof, echo=FALSE, fig.align='center', fig.height=8, fig.width=5}
 library(png)
 library(grid)
 img <- readPNG("img/studentprofile.png")
@@ -456,7 +513,7 @@ grid.raster(img)
 
 ## DEWS Box Zoom
 
-```{r dewsbox=FALSE, fig.align='center'}
+```{r dewsbox=FALSE, fig.align='center', fig.height=6, fig.width=8}
 library(png)
 library(grid)
 img <- readPNG("img/EWSPanel.png")
@@ -479,6 +536,7 @@ grid.raster(img)
 
 - DEWS Homepage: [http://www.dpi.wi.gov/dews](http://www.dpi.wi.gov/dews)
 - E-mail: jknowles@gmail.com
+- EWS Software on GitHub: [https://github.com/jknowles/ModelEWS](https://github.com/jknowles/ModelEWS)
 - GitHub: [http://www.github.com/jknowles](http://www.github.com/jknowles)
 - Homepage: [www.jaredknowles.com](http://www.jaredknowles.com/)
 - Twitter: @jknowles
