@@ -1,0 +1,14 @@
+TODO
+
+Hannah General Comments
+- Check punctuation, periods after all lines with a complete sentence
+- Inconsistent title capitalization, make it non title case, only first letter 
+capitalized
+- Make citation text smaller
+- Organize citations by year within list
+- Make sure all bullets are visible
+- Fix slash (show the numbers)
+- Consider spacing out bullets on slides with less content
+
+Hannah slide specific comments:
+- Make the variable table bigger
