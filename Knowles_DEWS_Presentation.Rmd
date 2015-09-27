@@ -19,52 +19,54 @@ opts_chunk$set(dev="png",
 
 ## The Problem in Predicting School Dropout
 
-1. Student dropout is a phenomenon that has roots much earlier in the education 
+>- Student dropout is a phenomenon that has roots much earlier in the education 
 pipeline than high school. 
 
-2. Current early identification strategies are of unknown accuracy, difficult 
+>- Current early identification strategies are of unknown accuracy, difficult 
 to implement, and rely on late breaking data. 
 
-3. The predictors of dropout vary across jurisdictions, making one size fits 
+>- The predictors of dropout vary across jurisdictions, making one size fits 
 all models inefficient, biased, or both. 
 
-4. Teachers, counselors, principals, and other school staff are spending valuable 
+>- Teachers, counselors, principals, and other school staff are spending valuable 
 time assessing student dropout likelihood using manual identification. 
 
 **State level early warning systems can help with this**
 
+## Wisconsin's EWS
+
+- Known as the Dropout Early Warning System (DEWS), in operation since 2013
+- Predicts on-time high school completion for all students in grades 5-8 in 
+the state, **240,000 predictions across 1,000 schools**
+- Provides validated predictions to start and end the school year based on data 
+availability
+- Built on open source packages for the R statistical computing language
+- Coupled with a user guide, documentation, and help desk support
+- DEWS is a platform built to be expanded into other domains such as college readiness, 
+college match, and middle school readiness
+
 ## Outline
 
 - Current state of early warning models
-- A gentle introduction to machine learning
+- Choosing how to measure accuracy
+- Wisconsin's machine learning approach
 - Deploying machine learning models to educators
 - Future challenges
 
 
-## The What of Early Warning Systems
 
-- EWSs are common in many industries and have a number of other names -- predictive 
-analytics, risk models, or machine learning
-- Schools currently do a lot of work around identifying students-at-risk in 
-response to federal and state laws and definitions
-- EWS has traditionally been thought of as a high school tool, but is increasingly 
-being introduced into middle school and earlier (Balfanz and Herzog 2006)
-- Existing EWS models fall into three broad categories -- checklist, regression, 
-and mixture/latent variable models
 
 ## What does the research say? Checklist models
 
 - Checklist models are easy to implement, have been shown to have high out-of-sample 
-validity in some school settings (Heppen and Therriault, 2008; Kennelly and
-Monrad, 2007; Easton and Allensworth, 2005 & 2007; Roderick and Camburn, 1999; 
-Allensworth, 2013, Balfanz and Herzog, 2006; Balfanz and Iver, 2007).
-- The downside of such checklist based systems is that they tend to overemphasize individual
-attributes like grades or attendance at the risk of oversimplifying the mechanisms underlying
-students’ risk of dropping out (Gleason and Dynarski, 2002). 
-- Often, educators are not given a strong sense of how well such indicator systems 
-perform and, thus, may not find it easy to weigh the results of such a checklist 
-against other evidence available to them.
-- Hard to validate locally
+validity in some school settings *(Heppen and Therriault, 2008; Easton and Allensworth, 2005 & 2007; Allensworth, 2013, Balfanz and Herzog, 2006; Balfanz and Iver, 2007)*.
+- The downside is that they overemphasize individual at the risk of oversimplifying 
+the mechanisms underlying risk *(Gleason and Dynarski, 2002)*. 
+- Often, educators are not given a strong sense of how well such systems perform 
+and, thus, may not be able to weigh the results against other evidence available 
+to them.
+- If not validated locally, the cutpoints in checklist models may be inaccurate. 
+Validating locally is difficult and intensive. 
 
 ## What does the research say? Regression models
 
@@ -91,19 +93,24 @@ and have not been proven out-of-sample (Muthén 2004)
 
 **What do we want from an EWS?**
 
-- **Early** identification in time to make interventions (grades5-8)
-- **Accurately** identifying students who need assistance and those who do not
-- **Transparency** in how predictions were made and how students are labeled
-- **Reproducibility** in the predictions so they vary with changes in underlying behaviors 
+>- **Early** identification in time to make interventions (grades 5-8)
+>- **Accuracy** in identifying students who need assistance and those who do not
+>- **Transparency** in how predictions were made and how students are labeled
+>- **Reproducibility** in the predictions so they vary with changes in underlying behaviors 
 not the models
-- **Scaleable** to a diverse array of student and school contexts
+>- **Scaleable** to a diverse array of student and school contexts
 
-## What does accuracy mean?
+## Why accuracy matters so much? 
 
-- Accuracy in binary classification is inherently a tradeoff between different 
-types of error
-- Accuracy of classification metrics must incorporate the trade-off between 
-different types of misclassification
+**Opportunity cost**
+
+>- Accuracy matters tremendously at scale. 
+>- 1,000 schools receiving on average 240 predictions each. 
+>- Each prediction reviewed by 3-5 staff for ~5 minutes
+>- 3 x 240 x $\frac{1}{12}$ = 60 hours or 5 x 240 x $\frac{1}{12}$ = 100 hours
+>- Across 1,000 schools thats 60,000 to 100,000 hours of work 
+
+We can use a confusion matrix to explore binary classification choices
 
 ## Confusion Matrix: Performance Matrix Choices
 
@@ -258,10 +265,10 @@ to hold constant while increasing our sensitivity.
 ## Comparing and contrasting apples to apples
 
 - There has been too much inconsistency in the application of accuracy metrics
-to make comparisons useful (Gleason and Dynarski, 2002; Jerald, 2006;
-Bowers et al., 2013). 
+to make comparisons useful *(Gleason and Dynarski, 2002; Jerald, 2006;
+Bowers et al., 2013).* 
 - Most of the 110 at-risk flags found in the  literature only include a measure 
-of the sensitivity, or the specificity, but rarely both Bowers et al. (2013).
+of the sensitivity, or the specificity, but rarely both *Bowers et al. (2013).*
 - In an effort to bring cohesion and clarity to the comparison of EWIs, Bowers
 et al. (2013) calculated the performance metrics for 110 separate EWIs found in the 
 literature
@@ -270,11 +277,11 @@ literature
 ## Receiver Operating Characteristic
 
 - ROC represents the tradeoff between the fraction of non-graduates identified out of 
-all non-graduates, and the fraction of false non-graduates out of all graduates 
-- Can support decision analysis by allowing a decision to be made explicitly about the 
-balance between false-positives and false-negatives
+all non-graduates (recall), and the fraction of false non-graduates out of all graduates 
+(precisions)
+- Can be summarized by AUC (area under the curve) to support decision analysis 
+about the balance between false-positives and false-negatives
 - Excellent for optimizing rare-class identification
-
 
 ## What is out there? {.flexbox .vcenter}
 
@@ -301,7 +308,6 @@ the evidence provided by the DEWS score
 fit statistics require re-estimation of the model
 - Select a hold-out data set with observed outcome data and evaluate all models 
 on their performance with that data
-- Hard to do this locally, easier to do at state scale
 
 ```{r cvtable, fig.align='center', fig.height=3, fig.width=9.5}
 library(png)
@@ -310,29 +316,39 @@ img <- readPNG("img/cvtable.png")
 grid.raster(img, interpolate = TRUE)
 ```
 
-## Why accuracy? 
 
-**Opportunity cost**
+## Knowing the Context: Wisconsin
 
->- Accuracy matters tremendously at scale. 
->- 1,000 schools receiving on average 240 predictions each. 
->- Each prediction reviewed by 3-5 staff for ~5 minutes
->- 3 x 240 x $\frac{1}{12}$ = 60 hours
->- 5 x 240 x $\frac{1}{12}$ = 100 hours
->- Across 1,000 schools thats 60,000 to 100,000 hours of work 
->- This could cost from $1 million to $4 million annually
-
-## What does this mean in Wisconsin?
-
-- Trying to take advantage of economies of scale -- one big accurate analysis 
-disseminated statewide
-- Unfortunately working statewide means we have a lot of observations, but a 
-dearth of measures
-- Context matters greatly and modeling strategies need to be able to reflect 
-this context
-- WI has a high graduation rate, so there is a needle in a haystack problem 
+- Wisconsin has a very high graduation rate, but very deep racial and economic 
+disparities (relative to other states)
+- Wisconsin has hundreds of middle schools, but a small fraction of them account 
+for the bulk of future high school non-completers
+- Wisconsin has no graduation test, low state graduation requirements (with 
+substantial variation between districts), and a vast majority of school districts 
+with a single high school
+- Wisconsin does not have high enough coursework data quality to support many 
+EWS analyses
+- At state level we have lots of observations, but relatively few measures
 
 
+## Wisconsin Variables
+
+```{r predtable, echo=FALSE, fig.align='center', fig.width=8, fig.height=3.5}
+library(png)
+library(grid)
+img <- readPNG("img/predictorTable.png")
+grid.raster(img)
+```
+
+## Choosing Machine Learning
+
+- A checklist model will not work statewide becuse of delays in data availability 
+and lack of key coursework measures
+- A regression model seems like a good starting place, but need to identify how 
+to measure accuracy out-of-sample to inform stakeholders
+- Even small incremental gains in accuracy (at the cost of tens of hours at DPI) 
+can save hundreds or thousands of hours in the field
+- Look at setting up a machine learning workflow
 
 ## The DEWS Workflow
 
@@ -346,29 +362,18 @@ grid.raster(img)
 # </div>
 ```
 
-## Wisconsin Variables
-
-```{r predtable, echo=FALSE, fig.align='center', fig.width=8, fig.height=3.5}
-library(png)
-library(grid)
-img <- readPNG("img/predictorTable.png")
-grid.raster(img)
-```
-
-
 ## A word on data preparation
 
 - Defining who is a non-completer and who is a completer is difficult and essential 
 to success
 - Predictors should be transformed -- categories collapsed, numeric indicators 
 centered and scaled, zero-variance data elements dropped
-- Worth an entire paper to discuss challenges here (Kuhn 2013; James et al. 2012)
+- Worth an entire paper to discuss challenges here
 
 ## Modeling
 
-- In Wisconsin we are looking to make tens of thousands of bi-annual predictions and 
-asking educators to pay attention to them
-- Start with some more basic models, build complexity in order to increase 
+- Be pluralistic and test many models -- only marginal cost is CPU time
+- Start with some more basic models, build complexity in order to find increased 
 accuracy (James et al. 2013)
 
 ```{r echo=FALSE, fig.height=4, fig.width=6, fig.align='center', message=FALSE, warning=FALSE}
@@ -393,7 +398,7 @@ qplot(x, y, geom='text', label=labs) + theme_classic() +
 
 ## Algorithm Search
 
-- Start with 35 candidate algorithms
+- Start with 35 candidate algorithms including logistic regression
 - Select 40,000 training observations and use 10 fold cross validation to tune 
 the parameters for each algorithm
 - Calculate the AUC on the test data for each algorithm
@@ -403,7 +408,7 @@ the parameters for each algorithm
 ## Ensemble
 
 - Retrain the selected models with more data and a wider tuning parameter search
-- Ensemble the models into a meta-model
+- Ensemble the models into a meta-model (using greedy optimization of the AUC)
 - Calculate AUC on a validation data set (not the training or test set)
 - Store meta-model for later scoring of new cases
 
@@ -492,6 +497,16 @@ Pred. Non. Grad. | 13,718     | 7,454
 - Find ways to make complexity approachable, digestable, and trustable
 - Transparency is key
 
+## Peaking Under the Black Box
+
+```{r varimp, echo=FALSE, fig.align='center', fig.height=8.2, fig.width=7.8}
+library(png)
+library(grid)
+img <- readPNG("img/VariableImportance.png")
+grid.raster(img)
+```
+
+
 ## Implementation
 
 - Not worth anything if predictions do not reach educators
@@ -510,7 +525,6 @@ grid.raster(img)
 ```
 
 
-
 ## DEWS Box Zoom
 
 ```{r dewsbox=FALSE, fig.align='center', fig.height=6, fig.width=8}
@@ -520,17 +534,16 @@ img <- readPNG("img/EWSPanel.png")
 grid.raster(img)
 ```
 
+## Future Work
 
-## Peaking Under the Black Box
-
-```{r varimp, echo=FALSE, fig.align='center', fig.height=8.2, fig.width=7.8}
-library(png)
-library(grid)
-img <- readPNG("img/VariableImportance.png")
-grid.raster(img)
-```
-
-
+- Make predictions more user friendly and easier to interpret for educators
+- Make DEWS automated enough for IT staff to execute predictions each time new 
+data is refreshed
+- Test ensembling methods more thoroughly for increased accuracy
+- Include rare-class (non-graduate) oversampling to better identify different 
+types of non-graduates
+- Automatically set threshold for low, moderate, high risk status
+- Blend a localized prediction with state model prediction for each district/school
 
 ## Contact Info
 
@@ -540,3 +553,26 @@ grid.raster(img)
 - GitHub: [http://www.github.com/jknowles](http://www.github.com/jknowles)
 - Homepage: [www.jaredknowles.com](http://www.jaredknowles.com/)
 - Twitter: @jknowles
+
+## Additional Slides
+
+## The What of Early Warning Systems
+
+- EWSs are common in many industries and have a number of other names -- predictive 
+analytics, risk models, or machine learning
+- Schools currently do a lot of work around identifying students-at-risk in 
+response to federal and state laws and definitions
+- EWS has traditionally been thought of as a high school tool, but is increasingly 
+being introduced into middle school and earlier (Balfanz and Herzog 2006)
+- Existing EWS models fall into three broad categories -- checklist, regression, 
+and mixture/latent variable models
+
+## What does this mean for Wisconsin's system?
+
+- Trying to take advantage of economies of scale -- one big accurate analysis 
+disseminated statewide
+- Unfortunately working statewide means we have a lot of observations, but a 
+dearth of measures
+- Context matters greatly and modeling strategies need to be able to reflect 
+this context
+- WI has a high graduation rate, so there is a needle in a haystack problem 
