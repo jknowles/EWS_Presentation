@@ -10,9 +10,6 @@ slides > slide.title-slide p {
   color: white;
 }
 
-slides > slide:not(.nobackground):after {
-  color: white;
-}
 
 slide{
   background-color: black;
@@ -24,8 +21,9 @@ body, p, td, li, div, ol, ul {
   color: white;
   background: black;
   background-color: black;
-  line-height: 1.1;
+  line-height: 1.15;
 }
+
 
 h1,h2,h3,h4,h5,h6 {
   color: white;

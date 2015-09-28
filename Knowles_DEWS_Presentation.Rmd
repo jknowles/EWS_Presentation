@@ -17,7 +17,7 @@ opts_chunk$set(dev="png",
                echo=FALSE, warning=FALSE, message=FALSE, dpi=68)
 ```
 
-## The Problem in Predicting School Dropout
+## The problem in predicting school dropout
 
 >- Student dropout is a phenomenon that has roots much earlier in the education 
 pipeline than high school. 
@@ -31,7 +31,7 @@ all models inefficient, biased, or both.
 >- Teachers, counselors, principals, and other school staff are spending valuable 
 time assessing student dropout likelihood using manual identification. 
 
-**State level early warning systems can help with this**
+**State level early warning systems (EWS) can help with this**
 
 ## Wisconsin's EWS
 
@@ -42,7 +42,7 @@ the state, **240,000 predictions across 1,000 schools**
 - Built on open source packages for the R statistical computing language
 - Coupled with a user's guide, documentation, and help desk support
 - DEWS is a platform built to be expanded into other domains such as college readiness, 
-college match, and middle school readiness
+college match, and middle school readiness.
 
 ## Outline
 
@@ -55,9 +55,10 @@ college match, and middle school readiness
 ## What does the research say? Checklist models
 
 - Checklist models are easy to implement, have high out-of-sample 
-validity in some school settings *(Heppen and Therriault, 2008; Easton and Allensworth, 2005 & 2007; Allensworth, 2013; Balfanz and Herzog, 2006; Balfanz and Iver, 2007)*.
+validity in some school settings <div style="font-size:16pt">(Allensworth, 2013; 
+Heppen and Therriault, 2008; Balfanz and Iver, 2007; Balfanz and Herzog, 2006; Easton and Allensworth, 2005 & 2007).</div>
 - The downside is that they emphasize individual indicators at the risk of oversimplifying 
-the mechanisms underlying risk *(Gleason and Dynarski, 2002)*. 
+the mechanisms underlying risk <div style="font-size:16pt">(Gleason and Dynarski, 2002).</div> 
 - Often, educators are not given a strong sense of how well such systems perform 
 and, thus, may not be able to weigh the results against other evidence available 
 to them.
@@ -75,17 +76,18 @@ year.
 but have higher data requirements -- weighting of different indicators is hard to 
 implement on the fly.
 
-## What does the research say? Mixture/Latent variable models
+## What does the research say? Mixture models
 
 - Growth mixture models (GMM) of math achievement growth are highly accurate in predicting 
-dropout (Muthén 2004).
-- Bowers and Sprott (2012) found that, even when limiting the GMM to data 
-available to most school staff, GMMs provide highly accurate predictions 
-of individual students’ high school completion.
+dropout <div style="font-size:16pt">(Muthén 2004).</div>
+- Bowers and Sprott (2012) found that, even when limited to data 
+available to most school staff, GMMs provide highly accurate predictions.
+- Mixture models have only been used in high school and require multiple observations 
+per student -- leaving out mobile students. 
 - Mixture/latent variable models are highly accurate, have demanding data requirements, 
-and have not been proven out-of-sample (Muthén 2004).
+but have not been proven out-of-sample <div style="font-size:16pt">(Muthén 2004).</div>
 
-## Choosing an EWS Statewide
+## Choosing an EWS statewide
 
 **What do we want from an EWS?**
 
@@ -105,9 +107,9 @@ not with changes in the models
 >- Each prediction reviewed by 3-5 staff for ~5 minutes
 >- 3 x 240 x $\frac{1}{12}$ = 60 hours or 5 x 240 x $\frac{1}{12}$ = 100 hours
 >- Across 1,000 schools that's 60,000 to 100,000 hours of work 
->- We can use a confusion matrix to explore binary classification choices
+>- We can use a confusion matrix to explore binary classification metrics.
 
-## Confusion Matrix: Performance Matrix Choices
+## Confusion Matrix: Performance metric choices
 
 <table style="float:center">
 <tr>
@@ -257,27 +259,26 @@ to hold constant while increasing our sensitivity.
 ## Comparing and contrasting apples to apples
 
 - There has been too much inconsistency in the application of accuracy metrics
-to make comparisons useful *(Gleason and Dynarski, 2002; Jerald, 2006;
-Bowers et al., 2013).* 
+to make comparisons useful <div style="font-size:16pt">(Bowers et al., 2013; Jerald, 2006; Gleason and Dynarski, 2002)./div> 
 - Most of the 110 at-risk flags found in the  literature only include a measure 
-of the sensitivity, or the specificity, but rarely both *(Bowers et al., 2013).*
+of the sensitivity, or the specificity, but rarely both <div style="font-size:16pt">(Bowers et al., 2013).</div>
 - In an effort to bring cohesion and clarity to the comparison of at-risk flags, 
 Bowers et al. (2013) calculated the performance metrics for 110 separate flags 
-found in the literature
+found in the literature.
 
 
 ## Receiver Operating Characteristic
 
 - ROC represents the tradeoff between the fraction of true non-graduates identified 
 out of all non-graduates (recall), and the fraction of false non-graduates out of all 
-true graduates (precision)
+true graduates (precision).
 - Can be summarized by AUC (area under the curve) to support decision analysis 
 about the balance between false-positives and false-negatives
 - Excellent for optimizing rare-class identification
 
 ## What is out there? {.flexbox .vcenter}
 
-<small>Adapted from Bowers, Sprott, and Taff 2013</small> 
+<div style="font-size:18pt">Adapted from Bowers, Sprott, and Taff 2013</div> 
 
 ```{r ewslitplot, fig.align='center', fig.height=7, fig.width=9.5}
 library(png)
@@ -289,18 +290,18 @@ grid.raster(img, interpolate = TRUE)
 ## What we really want to know
 - Limitation is that, in *most* cases, these are merely measures of how the model 
 performed in-sample
-- We want to *estimate* the likely accuracy for students receiving predictions today
+- We want to *estimate* the likely accuracy for students receiving predictions today.
 - This is critical to inform stakeholders about the appropriate weight to give 
-the evidence provided by the DEWS score
-- Estimating accuracy on future data is a key feature of machine learning
+the evidence provided by the DEWS score.
+- Estimating accuracy on future data is a key feature of machine learning.
 
 ## Estimating out-of-sample error rates
 - Unlike model fit statistics, such as AIC, BIC, and $R^{2}$, out-of-sample 
-fit statistics require re-estimation of the model
+fit statistics require re-estimation of the model.
 - Select a hold-out data set with observed outcome data and evaluate all models 
 on their performance with that data
 
-```{r cvtable, fig.align='center', fig.height=3, fig.width=9.5}
+```{r cvtable, fig.align='center', fig.height=3, fig.width=9.5, dpi=96}
 library(png)
 library(grid)
 img <- readPNG("img/cvtable.png")
@@ -311,40 +312,39 @@ grid.raster(img, interpolate = TRUE)
 ## Knowing the Context: Wisconsin
 
 - Wisconsin has a very high graduation rate, but very deep racial and economic 
-disparities (relative to other states)
+disparities (relative to other states).
 - Wisconsin has hundreds of middle schools, but a small fraction of them account 
-for the bulk of future high school non-completers
+for the bulk of future high school non-completers.
 - Wisconsin has no graduation test, low state graduation requirements (with 
-substantial variation between districts), and a vast majority of school districts 
-with a single high school
+substantial variation between districts), and a majority of school districts 
+with a single high school.
 - Wisconsin does not have high enough coursework data quality to support many 
-EWS analyses
-- At the state level, we have lots of observations but relatively few measures
+EWS analyses.
+- At the state level, we have lots of observations but relatively few measures.
 
 
-## Wisconsin Variables
+## Wisconsin variables
 
-```{r predtable, echo=FALSE, fig.align='center', fig.width=8, fig.height=3.5}
+```{r predtable, echo=FALSE, fig.align='center', fig.width=8, fig.height=3.5, dpi=100}
 library(png)
 library(grid)
 img <- readPNG("img/predictorTable.png")
 grid.raster(img)
 ```
 
-- WKCE: Wisconsin Knowledge and Concepts state accountability test for grades 
-3-8 and 10
+- <div style="font-size:16pt">WKCE: Wisconsin Knowledge and Concepts state accountability test for grades 3-8 and 10</div>
 
-## Choosing Machine Learning
+## Machine learning
 
 - A checklist model will not work statewide because of delays in data availability 
-and lack of key coursework measures
+and lack of key coursework measures.
 - A regression model seems like a good starting place, but need to identify how 
-to measure accuracy out-of-sample to inform stakeholders
+to measure accuracy out-of-sample to inform stakeholders.
 - Even small incremental gains in accuracy (at the cost of tens of hours at DPI) 
-can save hundreds or thousands of hours in the field
-- Look at setting up a machine learning workflow
+can save hundreds or thousands of hours in the field.
+- Look at setting up a machine learning workflow to standardize this process
 
-## The DEWS Workflow
+## The DEWS workflow
 
 ```{r echo=FALSE, fig.align='center', fig.height=7, fig.width=9.5}
 library(png)
@@ -361,14 +361,14 @@ grid.raster(img)
 - Defining who is a non-completer and who is a completer is difficult but essential 
 to success
 - Predictors should be transformed -- categories collapsed, numeric indicators 
-centered and scaled, zero-variance data elements dropped
+centered and scaled, zero-variance data elements dropped.
 - Worth an entire paper to discuss challenges here
 
 ## Modeling
 
 - Be pluralistic and test many models -- only marginal cost is CPU time
 - Start with some basic models, build complexity in order to find increased 
-accuracy (James et al., 2013)
+accuracy <div style="font-size:16pt">(James et al., 2013)</div>
 
 ```{r echo=FALSE, fig.height=4, fig.width=6, fig.align='center', message=FALSE, warning=FALSE}
 library(eeptools)
@@ -390,7 +390,7 @@ qplot(x, y, geom='text', label=labs) + theme_classic() +
   theme(axis.text=element_blank(), axis.ticks=element_blank())
 ```
 
-## Algorithm Search
+## Algorithm search
 
 - Start with 35 candidate algorithms including logistic regression
 - Select 40,000 training observations and use 10-fold cross validation to tune 
@@ -410,12 +410,12 @@ the parameters for each algorithm
 
 - Not much added work beyond the above tasks
 - Hedges against overfit and borrows strength from diverse algorithms 
-(Kuncheva and Whitaker, 2003; Sollich and Krogh, 1996)
+<div style="font-size:16pt">(Kuncheva and Whitaker, 2003; Sollich and Krogh, 1996)</div>
 - Lots of room for improvement here, including optimizing a more sophisticated 
 meta-model beyond weighted average of individual predictions
 
 
-## Logit/Probit Model Performance
+## Probit model performance
 
 ```{r glmperf, echo=FALSE, fig.align='center'}
 library(png)
@@ -444,7 +444,7 @@ grid.raster(img)
 ```
 
 
-## Test Data Performance
+## Performance with test data
 
 ```{r testdatperf, echo=FALSE, fig.align='center'}
 library(png)
@@ -455,27 +455,31 @@ grid.raster(img)
 
 ## Prediction
 
-- The whole ballgame is to make predictions on current students at scale
+- The whole ballgame is to make predictions on current students at scale.
 - Need to assign them to a category (low, medium, high risk) based on predicted 
 probabilities
 - Calculate an optimal probability threshold by consulting with content experts 
 - In Wisconsin we determinined that between 10 and 25 false-positives would be acceptable 
-for one less false-negative
+for one less false-negative.
 - The later the intervention (and prediction grade) the less acceptable false-positives 
-become
+become.
 
-## Combined Test and Training Data Results for Grade 7
+## Combined test and training results for grade 7
 
 Confusion Matrix  | Observed Grad | Observed Non. Grad
 ------------- | ------------- | -------------------
 Pred. Grad.   | 84,744        | 3,670 
 Pred. Non. Grad. | 13,718     | 7,454
 
-## Challenges with Machine Learning 
+## Challenges with machine learning
+
+<div style="line-height:200%">
 
 - Hard to interpret results
 - Difficult to get stability
 - Concerns with the "black box"
+
+</div>
 
 ## Overcoming challenges
 
@@ -484,7 +488,7 @@ Pred. Non. Grad. | 13,718     | 7,454
 - Find ways to make complexity approachable and trustworthy
 - Transparency is key
 
-## Peaking Under the Black Box
+## Peaking in the black box
 
 ```{r varimp, echo=FALSE, fig.align='center', fig.height=8, fig.width=7.8}
 library(png)
@@ -521,7 +525,7 @@ img <- readPNG("img/EWSPanel.png")
 grid.raster(img)
 ```
 
-## Future Work
+## Future work
 
 - Make predictions more user-friendly and easier to interpret for educators
 - Make DEWS automated enough for IT staff to execute predictions each time new 
@@ -546,7 +550,7 @@ for each district/school
 
 ## Algorithms Chosen By Grade
 
-```{r algotable, fig.align='center', fig.height=5, fig.width=8}
+```{r algotable, fig.align='center', fig.height=5, fig.width=8, dpi=90}
 library(png)
 library(grid)
 img <- readPNG("img/algotable.png")
@@ -557,11 +561,11 @@ grid.raster(img, interpolate = TRUE)
 ## The What of Early Warning Systems
 
 - EWSs are common in many industries and have a number of other names -- predictive 
-analytics, risk models, or machine learning
+analytics, risk models, or machine learning.
 - Schools currently do a lot of work around identifying students-at-risk in 
-response to federal and state laws and definitions
+response to federal and state laws and definitions.
 - EWS has traditionally been thought of as a high school tool, but is increasingly 
-being introduced into middle school and earlier (Balfanz and Herzog 2006)
+being introduced into middle school and earlier (Balfanz and Herzog 2006).
 - Existing EWS models fall into three broad categories -- checklist, regression, 
 and mixture/latent variable models
 
