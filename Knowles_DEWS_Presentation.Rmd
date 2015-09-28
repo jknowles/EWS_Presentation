@@ -81,13 +81,13 @@ and dissemination challenge.
 ## What does the research say? Mixture models
 
 - Growth mixture models (GMM) of math achievement growth are highly accurate in predicting 
-dropout <div style="font-size:16pt">(Muthén 2004)</div>.
+dropout <div style="font-size:16pt">(Muthén 2004).</div>
 - Bowers and Sprott (2012) found that, even when limited to data 
 available to most school staff, GMMs provide highly accurate predictions.
 - Mixture models have only been used in high school and require multiple observations 
 per student -- leaving out mobile students. 
 - Mixture/latent variable models are highly accurate, have demanding data requirements, 
-but have not been proven out-of-sample <div style="font-size:16pt">(Muthén 2004)</div>.
+but have not been proven out-of-sample <div style="font-size:16pt">(Muthén 2004).</div>
 
 ## Choosing an EWS statewide
 
@@ -260,9 +260,9 @@ to hold constant while increasing our sensitivity.
 ## Comparing and contrasting apples to apples
 
 - There has been too much inconsistency in the application of accuracy metrics
-to make comparisons useful <div style="font-size:16pt">(Bowers et al., 2013; Jerald, 2006; Gleason and Dynarski, 2002)</div>.
+to make comparisons useful <div style="font-size:16pt">(Bowers et al., 2013; Jerald, 2006; Gleason and Dynarski, 2002).</div>
 - Most of the 110 at-risk flags found in the  literature only include a measure 
-of the sensitivity, or the specificity, but rarely both <div style="font-size:16pt">(Bowers et al., 2013)</div>.
+of the sensitivity, or the specificity, but rarely both <div style="font-size:16pt">(Bowers et al., 2013).</div>
 - In an effort to bring cohesion and clarity to the comparison of at-risk flags, 
 Bowers et al. (2013) calculated the performance metrics for 110 separate flags 
 found in the literature.
