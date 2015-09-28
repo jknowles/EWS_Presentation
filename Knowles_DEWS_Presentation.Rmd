@@ -72,20 +72,22 @@ combine estimates and validate indicators.
 - Carl et al. (2013) use regression models to estimate a student’s probability of
 high school completion conditional on the number and type of credits earned in the freshman
 year.
-- Regression models have been shown to be flexible to multiple school contexts, 
-but have higher data requirements -- weighting of different indicators is hard to 
-implement on the fly.
+- Regression models are flexible to multiple school contexts, 
+but have higher data requirements -- models must be computed and stored to 
+provide predictions. 
+- Regression models are not easily implemented by school staff posing communication 
+and dissemination challenge.
 
 ## What does the research say? Mixture models
 
 - Growth mixture models (GMM) of math achievement growth are highly accurate in predicting 
-dropout <div style="font-size:16pt">(Muthén 2004).</div>
+dropout <div style="font-size:16pt">(Muthén 2004)</div>.
 - Bowers and Sprott (2012) found that, even when limited to data 
 available to most school staff, GMMs provide highly accurate predictions.
 - Mixture models have only been used in high school and require multiple observations 
 per student -- leaving out mobile students. 
 - Mixture/latent variable models are highly accurate, have demanding data requirements, 
-but have not been proven out-of-sample <div style="font-size:16pt">(Muthén 2004).</div>
+but have not been proven out-of-sample <div style="font-size:16pt">(Muthén 2004)</div>.
 
 ## Choosing an EWS statewide
 
@@ -136,7 +138,6 @@ not with changes in the models
 - Accuracy = $\frac{(a+d)}{(a+b+c+d)}$
 - Precision (positive predictive value) = $\frac{a}{(a+b)}$
 - Sensitivity (recall) = $\frac{a}{(a+c)}$
-- Specificity (negative predictive value) = $\frac{d}{(b+d)}$
 - False alarm (1-specificity) = $\frac{b}{(b+d)}$
 
 ## Confusion Matrix: Accuracy
@@ -225,7 +226,7 @@ fail to graduate?
 - Useful if we we want to accurately identify rare events and are less worried 
 about how accurate we are with the modal case. 
 
-## Confusion Matrix: Specificity
+## Confusion Matrix: Specificity and false alarm
 
 <table>
 <tr>
@@ -259,9 +260,9 @@ to hold constant while increasing our sensitivity.
 ## Comparing and contrasting apples to apples
 
 - There has been too much inconsistency in the application of accuracy metrics
-to make comparisons useful <div style="font-size:16pt">(Bowers et al., 2013; Jerald, 2006; Gleason and Dynarski, 2002)./div> 
+to make comparisons useful <div style="font-size:16pt">(Bowers et al., 2013; Jerald, 2006; Gleason and Dynarski, 2002)</div>.
 - Most of the 110 at-risk flags found in the  literature only include a measure 
-of the sensitivity, or the specificity, but rarely both <div style="font-size:16pt">(Bowers et al., 2013).</div>
+of the sensitivity, or the specificity, but rarely both <div style="font-size:16pt">(Bowers et al., 2013)</div>.
 - In an effort to bring cohesion and clarity to the comparison of at-risk flags, 
 Bowers et al. (2013) calculated the performance metrics for 110 separate flags 
 found in the literature.
@@ -356,7 +357,7 @@ grid.raster(img)
 # </div>
 ```
 
-## A few words on data preparation
+## A few words on data acquisition and transformation
 
 - Defining who is a non-completer and who is a completer is difficult but essential 
 to success
@@ -364,7 +365,7 @@ to success
 centered and scaled, zero-variance data elements dropped.
 - Worth an entire paper to discuss challenges here
 
-## Modeling
+## Training models
 
 - Be pluralistic and test many models -- only marginal cost is CPU time
 - Start with some basic models, build complexity in order to find increased 
